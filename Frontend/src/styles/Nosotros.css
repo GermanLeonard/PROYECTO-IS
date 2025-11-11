@@ -1,0 +1,97 @@
+.nosotros {
+    position: relative;
+    padding: 80px 50px;
+    text-align: center;
+    background-image: url("../assets/imagenes/FondoNosotros.png");
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    border-radius: 0px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.cuadro {
+    background-color: #FFF;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display:flex;
+    width: 85%;
+    max-width: 1100px;
+    height: auto;
+    margin: 0 auto;
+}
+
+
+
+.nosotros h3 {
+    position: relative;
+    font-family: 'Lato', sans-serif;
+    color: #F27F1A;
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 40px;
+    display: inline-block;
+    background: #F0F0F0;
+    padding: 10px 20px;
+    text-shadow: 0px 4px 4px rgba(240, 240, 240, 0.5);
+    border-radius: 16px; 
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: stretch; 
+    flex-wrap: wrap; 
+}
+
+.info-container div {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.imagen-deporte {
+    position: absolute;
+    bottom: 0px; 
+    right: -60px;
+    width: 380px; 
+    height: auto; 
+}
+
+.info-container p {
+    font-family: 'Lato', sans-serif;
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.info-container p span {
+    font-size: larger;
+    color: #F27F1A;
+    font-weight: 700;
+}
+
+@media (min-width: 769px) {
+    .info-container {
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .info-container div {
+        width: 45%;
+    }
+
+    .imagen-deporte {
+        position: absolute;
+        bottom: 0;
+        right: -60px;
+        width: 380px;
+    }
+}

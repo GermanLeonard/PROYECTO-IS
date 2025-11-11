@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.agregar-cancha-form {
+    max-width: 800px;
+    margin: 50px auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    font-family: 'Lato', sans-serif;
+}
+
+.agregar-cancha-form p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.agregar-cancha-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.agregar-cancha-column {
+    flex: 1;
+    min-width: 280px;
+}
+
+.agregar-cancha-column div {
+    margin-bottom: 20px;
+}
+
+.agregar-cancha-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.agregar-cancha-input,
+.agregar-cancha-select,
+.agregar-cancha-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.agregar-cancha-textarea {
+    min-height: 100px;
+    resize: none;
+}
+
+.agregar-cancha-input:focus,
+.agregar-cancha-select:focus,
+.agregar-cancha-textarea:focus {
+    outline: none;
+    border-color: #ff7700;
+    box-shadow: 0 0 4px rgba(255, 119, 0, 0.5);
+}
+
+.agregar-cancha-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #ff7700;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.agregar-cancha-button:hover {
+    background-color: #cc5f00;
+    transform: scale(1.03);
+}
+
+.agregar-cancha-button:active {
+    background-color: #b35300;
+}
+
+@media screen and (max-width: 768px) {
+    .agregar-cancha-form {
+        padding: 20px;
+    }
+
+    .agregar-cancha-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .agregar-cancha-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

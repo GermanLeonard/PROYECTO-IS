@@ -1,0 +1,147 @@
+.contact-container {
+  gap: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.contact-header {
+  font-size: 2em;
+  font-weight: bold;
+  color: #ff6600;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.contact-wrapper {
+  width: 100%;
+  max-width: 64rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.info-section {
+  background-color: #fb923c;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.decoration-circle-1 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16rem;
+  height: 16rem;
+  background-color: #ffa053;
+  border-radius: 50%;
+  transform: translate(50%, 50%);
+}
+
+.decoration-circle-2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10rem;
+  height: 10rem;
+  background-color: #ffa053;
+  border-radius: 50%;
+  transform: translate(40%, -40%);
+}
+
+.info-content {
+  position: relative;
+  z-index: 10;
+}
+
+.info-content h2 {
+  color: white;
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.info-content p {
+  color: white;
+  font-size: 1.125rem;
+  opacity: 0.9;
+}
+
+.form-section {
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 90%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #fb923c;
+  box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.2);
+}
+
+.form-group textarea {
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.contact-container button {
+  width: 100%;
+  background-color: #fb923c;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-container button:hover {
+  background-color: #f97316;
+}
+
+@media (min-width: 768px) {
+  .contact-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+::placeholder {
+  color: #9ca3af;
+}
+
+.contact-container input:invalid,
+.contact-container textarea:invalid {
+  border-color: #ef4444;
+}
+
+.contact-container * {
+  transition: all 0.2s ease-in-out;
+}

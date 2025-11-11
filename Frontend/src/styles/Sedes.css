@@ -1,0 +1,181 @@
+.sedes {
+    padding-top: 50px; 
+    padding-bottom: 50px;
+    background-color: #f8f8f8;
+
+}
+.sedes h3 {
+    display: flex;
+    color: #F27F1A;
+    font-family: 'Lato', sans-serif;
+    font-size: 3em;
+    padding: 10px 20px;
+    font-weight: bold;
+    text-shadow: 0px 4px 4px rgba(240, 240, 240, 0.25);
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    margin: 0 auto;
+}
+
+.sedes-info {
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 20px;
+    text-align: justify;
+    padding-inline: 150px;
+    padding-block: 10px;
+}
+
+.sedes-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sedes-info b {
+    color: #F27F1A;
+}
+
+.sedes-card {
+    max-width: 1150px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 104px;
+    align-items: center;
+    padding: 1.5rem 2.5rem;
+    margin-bottom: 70px;
+    border-radius: 24px;
+    background: linear-gradient(90deg, rgba(216, 216, 216, 0.69) 0%, rgba(250, 226, 206, 0.69) 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sedes-card h4 {
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: normal;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
+}
+
+.sedes-card p {
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+    width: 580px;
+    margin: 0 0 20px;
+}
+
+.sedes-card img {
+    height: 344px;
+    width: 460px;
+    border-radius: 24px;
+}
+
+button {
+    background-color: #F27F1A;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px 19px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #d2691e;
+}
+
+@media (max-width: 1024px) {
+    .sedes-info {
+        padding-inline: 50px;
+        font-size: 18px;
+    }
+
+    .sedes-card {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .sedes-card p {
+        width: 100%;
+    }
+
+    .sedes-card img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .sedes h3 {
+        font-size: 2.5em;
+        width: auto;
+        padding: 5px 10px;
+    }
+
+    .sedes-info {
+        padding-inline: 20px;
+        font-size: 16px;
+    }
+
+    .sedes-card {
+        padding: 1rem;
+        gap: 20px;
+    }
+
+    .sedes-card h4 {
+        font-size: 32px;
+    }
+
+    .sedes-card p {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sedes h3 {
+        font-size: 2em;
+    }
+
+    .sedes-info {
+        font-size: 14px;
+        padding-inline: 10px;
+    }
+
+    .sedes-card {
+        padding: 0.5rem;
+    }
+
+    .sedes-card h4 {
+        font-size: 24px;
+    }
+
+    .sedes-card p {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 6px 10px;
+    }
+}
+

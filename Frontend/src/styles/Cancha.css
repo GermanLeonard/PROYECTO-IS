@@ -1,0 +1,248 @@
+html, body {
+    overflow-y: auto; /* Permite el scroll */
+    height: 100%; /* Asegura que la página ocupe la altura completa */
+    font-family: 'Arial', sans-serif; /* Fuente estándar */
+    margin: 0;
+    padding: 0;
+}
+
+.cancha {
+    padding: 20px 40px;
+    background-color: #f8f9fa; /* Fondo suave */
+}
+
+.cancha-card {
+    display: flex;
+    gap: 40px;
+    margin-top: 100px;
+    background-color: #fff; /* Fondo blanco */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.cancha-card-image {
+    height: 100%;
+    border-radius: 20px;
+    max-width: 300px;
+    object-fit: cover; /* Asegura que la imagen se ajuste al contenedor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cancha-info {
+    border: 1px solid #ddd; /* Borde ligero */
+    padding: 20px;
+    border-radius: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cancha-info button {
+    background: #ff7a00;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancha-info button:hover {
+    background-color: #e06900;
+}
+
+.cancha-info > p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.cancha-descripcion p {
+    margin: 5px 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.cancha-descripcion span {
+    font-weight: bold;
+    color: #ff7a00;
+}
+
+.opciones-reserva {
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.opciones-reserva p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.dia-reserva {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    overflow-x: auto;
+    padding: 10px;
+    scrollbar-width: none; /* Oculta el scrollbar en navegadores compatibles */
+}
+
+.dia-reserva::-webkit-scrollbar {
+    display: none; /* Oculta el scrollbar en navegadores Webkit */
+}
+
+.dia-reserva div {
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.dia-reserva div:hover {
+    background-color: #ff7a00;
+    color: white;
+    border-color: #ff7a00;
+}
+
+.dia-reserva .active-day {
+    background-color: #ff7a00;
+    color: white;
+    border-color: #ff7a00;
+}
+
+.hora-reserva {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    overflow-x: auto;
+    padding: 10px;
+    scrollbar-width: none;
+}
+
+.hora-reserva::-webkit-scrollbar {
+    display: none;
+}
+
+.hora-reserva p {
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    color: #555;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.hora-reserva p:hover {
+    background-color: #ff7a00;
+    color: white;
+    border-color: #ff7a00;
+}
+
+.hora-reserva .active-day {
+    background-color: #ff7a00;
+    color: white;
+    border-color: #ff7a00;
+}
+
+.opciones-reserva button {
+    background-color: #ff7a00;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.opciones-reserva button:hover {
+    background-color: #e06900;
+}
+
+.relacionado-container {
+    margin: 40px auto;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .cancha-card {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px; 
+        margin-top: 50px;
+        padding: 15px; 
+    }
+
+    .cancha-card-image {
+        max-width: 90%; 
+        height: auto; 
+        border-radius: 15px;
+    }
+
+    .cancha-info {
+        padding: 15px; 
+        width: 100%; 
+    }
+
+    .cancha-info > p {
+        font-size: 18px; 
+        text-align: center; 
+    }
+
+    .cancha-info button {
+        font-size: 12px; 
+        padding: 8px 10px; 
+        width: 100%; 
+    }
+}
+
+@media (max-width: 480px) {
+    .cancha {
+        padding: 10px 20px; 
+    }
+
+    .cancha-card {
+        padding: 10px;
+        gap: 10px; 
+    }
+
+    .cancha-info > p {
+        font-size: 16px; 
+    }
+
+    .cancha-info button {
+        font-size: 10px; 
+        padding: 6px 8px; 
+    }
+
+    .cancha-card-image {
+        max-width: 100%; 
+        border-radius: 10px;
+    }
+}

@@ -1,0 +1,116 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+    overflow: hidden; /* Elimina desbordamiento */
+    box-sizing: border-box;
+    background-color: transparent; /* Asegura que padding no afecte el tamaño total */
+}
+
+/* Contenido del formulario */
+.auth-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Formulario */
+.auth-form {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.auth-form h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+/* Input Wrapper */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.auth-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333;
+    font-size: 1rem;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: none;
+    border-radius: 30px;
+    background-color: #F5C9A2;
+    font-size: 1rem;
+    color: #333;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Asegura que el padding no desborde */
+}
+
+.auth-input:focus {
+    outline: none;
+    box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Botón */
+.auth-button {
+    background-color: #FF8500;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.auth-button:hover {
+    background-color: #E47400;
+    transform: translateY(-3px);
+}
+
+/* Enlaces */
+.auth-link {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-link:hover {
+    color: #FF8500;
+}
+
+/* Ajustes globales */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Elimina la barra horizontal */
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}

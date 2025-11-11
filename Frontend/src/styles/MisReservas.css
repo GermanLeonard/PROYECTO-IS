@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.mis-reservas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 60px;
+    padding-top: 110px;
+    background-color: #f9f9f9;
+    font-family: 'Lato', sans-serif;
+    color: #333;
+}
+
+.reserva-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 800px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    align-items: center;
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reserva-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.reserva-card img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reserva-card button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #ff7700;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.reserva-card button:hover {
+    background-color: #cc5f00;
+    transform: scale(1.05);
+}
+
+.reserva-card button:active {
+    background-color: #b35300;
+}
+
+@media screen and (max-width: 768px) {
+    .mis-reservas {
+        padding: 20px;
+    }
+
+    .reserva-card {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .reserva-card img {
+        width: 150px;
+    }
+
+    .reserva-card button {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .mis-reservas {
+        padding: 10px;
+    }
+
+    .reserva-card {
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .reserva-card img {
+        width: 100px;
+    }
+
+    .reserva-card button {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+}
+

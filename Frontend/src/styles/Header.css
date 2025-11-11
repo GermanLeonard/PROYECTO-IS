@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Lato', sans-serif; 
+  scroll-behavior: smooth;
+}
+
+.header {
+  width: 100vw;
+  overflow: hidden;
+}
+
+.slider {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.0);
+  color: white;
+  border: none;
+  padding: 0px;
+  cursor: pointer;
+  font-size: 2rem;
+  z-index: 10;
+  box-shadow: none;
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 70px; 
+  left: 70px; 
+  color: #fff;
+  max-width: 500px; 
+  z-index: 10;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);;
+}
+
+.slide-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.2;
+  color: white;
+}
+
+.slide-text h1 span {
+  color: #F27F1A; 
+}
+
+.slide-text p {
+  font-size: 1.2rem; 
+  margin-top: 10px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.reserve-btn {
+  background-color: #F27F1A;
+  color: black;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.reserve-btn:hover {
+  background-color: #d2691e;
+  transform: scale(1.05); 
+}
+
+@media (max-width: 900px) {
+  .slider {
+    height: 70vh;
+  }
+
+  .slide-text {
+    bottom: 50px;
+    left: 50px; 
+    max-width: 400px;
+  }
+
+  .slide-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .slide-text p {
+    font-size: 1rem; 
+  }
+
+  .reserve-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .slider {
+    height: 50vh;
+  }
+
+  .slide-text {
+    bottom: 30px;
+    left: 30px; 
+    max-width: 300px;
+  }
+
+  .slide-text h1 {
+    font-size: 2rem;
+  }
+
+  .slide-text p {
+    font-size: 0.9rem; 
+  }
+
+  .reserve-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
