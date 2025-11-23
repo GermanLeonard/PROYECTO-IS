@@ -53,17 +53,6 @@ const Navbar = () => {
           <span>SPORT SPOT</span>
         </div>
 
-        {/* Hamburger Menu */}
-        <button 
-          className={`hamburger ${showMobileMenu ? "active" : ""}`}
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
         {/* Navigation Links */}
         <ul className={`navbar-links ${showMobileMenu ? "active" : ""}`}>
           <li><a href="/#header" onClick={() => setShowMobileMenu(false)}>Inicio</a></li>
@@ -105,6 +94,18 @@ const Navbar = () => {
               <a href="/register" className="btn btn-register">
                 Regístrate
               </a>
+              
+              {/* Hamburger Menu - Shows between buttons on mobile */}
+              <button 
+                className={`hamburger ${showMobileMenu ? "active" : ""}`}
+                onClick={toggleMobileMenu}
+                aria-label="Toggle menu"
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+
               <a href="/login" className="btn btn-login">
                 Ingresa
               </a>
