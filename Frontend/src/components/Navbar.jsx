@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
@@ -9,6 +9,18 @@ const Navbar = () => {
   const { token, setToken } = useContext(AppContext);
   const navigate = useNavigate();
 
+  // ================= DARK MODE HANDLING =================
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === "light" ? "dark" : "light");
+  };
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -18,34 +30,33 @@ const Navbar = () => {
     localStorage.removeItem("token");
   };
 
+
   return (
     <nav className={`navbar ${showMenu ? "responsive" : ""}`}>
       <div className="logo" onClick={() => navigate("/")}>
         <img src={assets.logo} alt="logo" />
         SPORT SPOT
       </div>
+
       <div className="hamburger" onClick={toggleMenu}>
         <div></div>
         <div></div>
         <div></div>
       </div>
+
       <ul className="nav-links">
-        <a href="/#header">
-          <li>Inicio</li>
-        </a>
-        <a href="/#sedes">
-          <li>Sedes</li>
-        </a>
-        <a href="/#nosotros">
-          <li>Nosotros</li>
-        </a>
-        <a href="/#faq">
-          <li>FAQ</li>
-        </a>
-        <a href="/#contact">
-          <li>Contáctanos</li>
-        </a>
+        <a href="/#header"><li>Inicio</li></a>
+        <a href="/#sedes"><li>Sedes</li></a>
+        <a href="/#nosotros"><li>Nosotros</li></a>
+        <a href="/#faq"><li>FAQ</li></a>
+        <a href="/#contact"><li>Contáctanos</li></a>
       </ul>
+
+      {/* ========== Dark Mode Toggle Button ========= */}
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {theme === "light" ? "🌙" : "☀️"}
+      </button>
+
       <ul className="profile">
         {token ? (
           <div className="nav-profile">
@@ -61,14 +72,10 @@ const Navbar = () => {
         ) : (
           <div className="auth-buttons">
             <li>
-              <a href="/register" className="register-btn">
-                Regístrate
-              </a>
+              <a href="/register" className="register-btn">Regístrate</a>
             </li>
             <li>
-              <a href="/login" className="login-btn">
-                Ingresa
-              </a>
+              <a href="/login" className="login-btn">Ingresa</a>
             </li>
           </div>
         )}
@@ -78,5 +85,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-

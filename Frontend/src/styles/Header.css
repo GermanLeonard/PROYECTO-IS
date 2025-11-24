@@ -33,8 +33,8 @@ body, html {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.0);
-  color: white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   border: none;
   padding: 0px;
   cursor: pointer;

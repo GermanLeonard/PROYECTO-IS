@@ -3,7 +3,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f8f8f8;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
