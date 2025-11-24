@@ -9,7 +9,7 @@ const Navbar = () => {
   const { token, setToken } = useContext(AppContext);
   const navigate = useNavigate();
 
-  // ================= DARK MODE HANDLING =================
+  // manejo de modo oscuro
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Navbar = () => {
         <a href="/#contact"><li>Contáctanos</li></a>
       </ul>
 
-      {/* ========== Dark Mode Toggle Button ========= */}
+      {/*Botón de modo oscuro*/}
       <button className="theme-toggle" onClick={toggleTheme}>
         {theme === "light" ? "🌙" : "☀️"}
       </button>
