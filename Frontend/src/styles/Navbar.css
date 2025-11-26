@@ -33,7 +33,6 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
   background-color: var(--nav-bg);
   color: var(--nav-text);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -201,6 +200,12 @@ body, html {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+.dropdown-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
 .dropdown-icon.rotate {
   transform: rotate(180deg);
 }
@@ -229,17 +234,32 @@ body, html {
 /* ================= TOGGLE THEME BUTTON ================= */
 
 .theme-toggle {
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
-  font-size: 1.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--nav-text);
-  transition: transform .2s ease;
+  transition: all 0.3s ease;
+  border-radius: 8px;
 }
 
 .theme-toggle:hover {
-  transform: scale(1.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover svg {
+  transform: rotate(20deg);
 }
 
 /* ================= RESPONSIVE ================= */
@@ -300,6 +320,15 @@ body, html {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
   }
+  
+  .theme-toggle {
+    padding: 0.4rem;
+  }
+  
+  .theme-toggle svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -333,5 +362,14 @@ body, html {
   .dropdown-icon {
     width: 16px;
     height: 16px;
+  }
+  
+  .theme-toggle {
+    padding: 0.3rem;
+  }
+  
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
   }
 }
