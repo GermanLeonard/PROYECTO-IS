@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Cancha from './pages/Cancha'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import "./styles/theme.css";
 
 
 function App() {
