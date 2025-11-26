@@ -1,22 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
-body, html {
+/* Reset */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
   width: 100%;
   height: 100%;
   font-family: 'Lato', sans-serif;
   scroll-behavior: smooth;
 }
 
-/* ================= NAVBAR ================= */
-
+/* Navbar Container */
 .navbar {
+  position: fixed;
   top: 0;
   left: 0;
-  position: fixed;
-  z-index: 10;
   width: 100%;
+  background-color: rgba(51, 51, 51, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,17 +51,24 @@ body, html {
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-size: 1.8rem;
   font-weight: bold;
   color: var(--primary-color); 
   cursor: pointer;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease;
+  user-select: none;
 }
 
-.logo img {
+.navbar-logo:hover {
+  transform: scale(1.02);
+}
+
+.navbar-logo img {
   width: 50px;
   height: 50px;
+  object-fit: contain;
 }
 
 /* ================= MENU HAMBURGUESA ================= */
@@ -139,24 +159,33 @@ body, html {
 .profile {
   display: flex;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
   gap: 1rem;
 }
 
-.nav-profile {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.profile-container {
   position: relative;
-  cursor: pointer;
 }
 
-.nav-profile img {
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.profile-trigger:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #F27F1A;
 }
 
 /* Dropdown */
@@ -172,11 +201,8 @@ body, html {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.nav-profile:hover .nav-dropdown-container,
-.nav-dropdown-container:hover {
-  display: block;
-  opacity: 1;
-  visibility: visible;
+.dropdown-icon.rotate {
+  transform: rotate(180deg);
 }
 
 .nav-dropdown {
@@ -192,8 +218,8 @@ body, html {
   padding: 10px 0;
   color: var(--text-color);
   cursor: pointer;
-  font-size: 0.9rem;
   transition: background-color 0.2s ease;
+  font-family: 'Lato', sans-serif;
 }
 
 .nav-dropdown p:hover {
@@ -219,46 +245,93 @@ body, html {
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 900px) {
-  .hamburger {
+  .navbar-container {
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+  }
+
+  /* Show hamburger only on mobile when not logged in */
+  .auth-buttons .hamburger {
     display: flex;
   }
 
-  .nav-links {
+  .navbar-links {
     display: none;
-    flex-direction: column;
-    gap: 1rem;
     width: 100%;
+    order: 4;
+    flex-direction: column;
+    gap: 0;
     margin-top: 1rem;
+    background-color: rgba(51, 51, 51, 0.98);
+    border-radius: 10px;
+    padding: 1rem 0;
   }
 
-  .navbar.responsive .nav-links {
+  .navbar-links.active {
     display: flex;
+  }
+
+  .navbar-links a {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+  }
+
+  .navbar-links a::after {
+    display: none;
+  }
+
+  .navbar-logo {
+    font-size: 1.5rem;
+  }
+
+  .navbar-logo img {
+    width: 40px;
+    height: 40px;
   }
 
   .auth-buttons {
-    gap: 0.5rem;
-    margin-top: 1rem;
+    flex-direction: row;
+    gap: 0.75rem;
+    align-items: center;
   }
 
-  .register-btn,
-  .login-btn {
+  .btn {
+    padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
-    padding: 0.5rem 1rem;
   }
 }
 
 @media (max-width: 600px) {
-  .logo {
-    font-size: 1.5rem;
+  .navbar-container {
+    padding: 0.75rem 1rem;
   }
 
-  .nav-links a {
-    font-size: 1rem;
+  .navbar-logo {
+    font-size: 1.3rem;
   }
 
-  .register-btn,
-  .login-btn {
+  .navbar-logo img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .auth-buttons {
+    gap: 0.5rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
     font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
+  }
+
+  .profile-img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dropdown-icon {
+    width: 16px;
+    height: 16px;
   }
 }

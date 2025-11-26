@@ -1,13 +1,15 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const { token, setToken } = useContext(AppContext);
   const navigate = useNavigate();
+  const profileRef = useRef(null);
 
   // manejo de modo oscuro
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -28,6 +30,13 @@ const Navbar = () => {
   const logout = () => {
     setToken(false);
     localStorage.removeItem("token");
+    setShowProfileDropdown(false);
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setShowProfileDropdown(false);
+    setShowMobileMenu(false);
   };
 
 
@@ -67,6 +76,17 @@ const Navbar = () => {
                 <p onClick={() => navigate("/mis-reservas")}>Mis Reservas</p>
                 <p onClick={logout}>Cerrar Sesión</p>
               </div>
+              
+              {showProfileDropdown && (
+                <div className="profile-dropdown">
+                  <button onClick={() => handleNavigation("/mis-reservas")}>
+                    Mis Reservas
+                  </button>
+                  <button onClick={logout}>
+                    Cerrar Sesión
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ) : (
