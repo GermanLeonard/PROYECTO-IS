@@ -27,7 +27,7 @@ body, html {
 }
 
 .navbar-container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;
@@ -241,7 +241,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--nav-text);
+  color: var(--text-color);
   transition: all 0.3s ease;
   border-radius: 8px;
 }
@@ -260,6 +260,10 @@ body, html {
 
 .theme-toggle:hover svg {
   transform: rotate(20deg);
+}
+
+.navbar-container .theme-toggle{
+    box-shadow: none;
 }
 
 /* ================= RESPONSIVE ================= */
