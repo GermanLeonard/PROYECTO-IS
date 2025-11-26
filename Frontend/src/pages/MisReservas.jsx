@@ -1,160 +1,297 @@
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import "../styles/MisReservas.css";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
+import reservasService from "../services/reservasService";
+import "../styles/MisReservas.css";
 
 const MisReservas = () => {
+  const { backendUrl, token, getCanchasData } = useContext(AppContext);
+  const [reservas, setReservas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filtro, setFiltro] = useState("todas"); // todas, activas, pasadas, canceladas
+
   const imagenes = {
     Futbol: assets.CanchaFutbolEjemplo,
     Basketball: assets.CanchaBasketballEjemplo,
     Padel: assets.CanchaPadelEjemplo,
   };
 
-  const meses = [
-    "",
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
-  ];
-
-  const formatoFecha = (espacioFecha) => {
-    const fechaArray = espacioFecha.split("_");
-    return (
-      fechaArray[0] + " " + meses[Number(fechaArray[1])] + " " + fechaArray[2]
-    );
-  };
-
-  const { backendUrl, token, getCanchasData } = useContext(AppContext);
-  const [reservas, setReservas] = useState([]);
-
-  const getReservas = async () => {
+  /**
+   * Obtiene las reservas del usuario
+   */
+  const cargarReservas = async () => {
+    setLoading(true);
     try {
-      const { data } = await axios.get(backendUrl + "/api/user/mis-reservas", {
-        headers: { token },
-      });
+      const data = await reservasService.obtenerReservas(backendUrl, token);
       if (data.success) {
         setReservas(data.reservas.reverse());
+      } else {
+        toast.error(data.message || "Error al cargar reservas");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const cancelarReserva = async (reservaId) => {
+  /**
+   * Cancela una reserva específica
+   */
+  const manejarCancelacion = async (reservaId) => {
+    // Confirmación antes de cancelar
+    if (!window.confirm("¿Estás seguro de que deseas cancelar esta reserva?")) {
+      return;
+    }
+
     try {
-      const { data } = await axios.post(
-        backendUrl + "/api/user/cancelar-reserva",
-        { reservaId },
-        { headers: { token } }
+      const data = await reservasService.cancelarReserva(
+        backendUrl,
+        token,
+        reservaId
       );
+      
       if (data.success) {
-        getReservas();
-        toast.success(data.message);
+        toast.success(data.message || "Reserva cancelada exitosamente");
+        await cargarReservas();
         getCanchasData();
       } else {
-        toast.error(data.message);
+        toast.error(data.message || "Error al cancelar reserva");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error(error.message);
     }
   };
 
-  //función para saber si la fecha ya pasó
-  const reservaYaPaso = (item) => {
-    const [dia, mes, year] = item.espacioFecha.split("_").map(Number);
-    const [hora, minuto] = item.reservaHora.split(":").map(Number);
+  /**
+   * Filtra las reservas según el filtro seleccionado
+   */
+  const reservasFiltradas = reservas.filter((reserva) => {
+    const paso = reservasService.reservaYaPaso(reserva);
 
-    const fechaReserva = new Date(year, mes - 1, dia, hora, minuto);
-    const ahora = new Date();
+    switch (filtro) {
+      case "activas":
+        return !reserva.cancelado && !paso;
+      case "pasadas":
+        return !reserva.cancelado && paso;
+      case "canceladas":
+        return reserva.cancelado;
+      default:
+        return true;
+    }
+  });
 
-    return fechaReserva < ahora;
+  /**
+   * Obtiene el badge de estado de la reserva
+   */
+  const obtenerEstadoBadge = (reserva) => {
+    const paso = reservasService.reservaYaPaso(reserva);
+
+    if (reserva.cancelado) {
+      return <span className="badge badge-cancelado">Cancelada</span>;
+    }
+    if (paso) {
+      return <span className="badge badge-expirada">Expirada</span>;
+    }
+    return <span className="badge badge-activa">Activa</span>;
   };
 
   useEffect(() => {
     if (token) {
-      getReservas();
+      cargarReservas();
     }
   }, [token]);
 
   return (
-    <div className="mis-reservas">
-      <p>Mis Reservas</p>
-      <div>
-        {/*MENSAJE SI NO HAY RESERVAS */}
-        {reservas.length === 0 && (
-          <p
-            style={{ textAlign: "center", marginTop: "20px", fontSize: "18px" }}
-          >
-            No tienes reservas registradas.
-          </p>
-        )}
-        {reservas.map((item, index) => {
-          const paso = reservaYaPaso(item);
-
-          return (
-            <div key={index} className="reserva-card">
-              <div>
-                <img src={imagenes[item.canchaData.deporte]} alt="cancha" />
-              </div>
-
-              <div>
-                <p>{item.canchaData.name}</p>
-                <p>{item.canchaData.deporte}</p>
-                <br />
-                <p>Dirección:</p>
-                <p>{item.canchaData.direccion}</p>
-                <br />
-                <p>
-                  <span>Fecha y Hora: </span>
-                  {formatoFecha(item.espacioFecha)} | {item.reservaHora}
-                </p>
-
-                {/*mostrar estado de la reserva */}
-                {item.cancelado && (
-                  <p className="estado-cancelado">🚫 Reserva cancelada</p>
-                )}
-                {!item.cancelado && paso && (
-                  <p className="estado-expirada">⏳ Reserva expirada</p>
-                )}
-              </div>
-
-              <div>
-                {/*reglas para mostrar o no el botón */}
-                {!item.cancelado && !paso && (
-                  <button
-                    onClick={() => {
-                      cancelarReserva(item._id);
-                      window.location.reload();
-                    }}
-                  >
-                    Cancelar reserva
-                  </button>
-                )}
-
-                {(item.cancelado || paso) && (
-                  <button disabled className="btn-deshabilitado">
-                    No disponible
-                  </button>
-                )}
-              </div>
-            </div>
-          );
-        })}
+    <div className="mis-reservas-container">
+      <div className="mis-reservas-header">
+        <h1>Mis Reservas</h1>
+        <p className="mis-reservas-subtitle">
+          Gestiona todas tus reservas en un solo lugar
+        </p>
       </div>
+
+      {/* Filtros */}
+      <div className="filtros-container">
+        <button
+          className={`filtro-btn ${filtro === "todas" ? "activo" : ""}`}
+          onClick={() => setFiltro("todas")}
+        >
+          Todas ({reservas.length})
+        </button>
+        <button
+          className={`filtro-btn ${filtro === "activas" ? "activo" : ""}`}
+          onClick={() => setFiltro("activas")}
+        >
+          Activas (
+          {
+            reservas.filter(
+              (r) => !r.cancelado && !reservasService.reservaYaPaso(r)
+            ).length
+          }
+          )
+        </button>
+        <button
+          className={`filtro-btn ${filtro === "pasadas" ? "activo" : ""}`}
+          onClick={() => setFiltro("pasadas")}
+        >
+          Pasadas (
+          {
+            reservas.filter(
+              (r) => !r.cancelado && reservasService.reservaYaPaso(r)
+            ).length
+          }
+          )
+        </button>
+        <button
+          className={`filtro-btn ${filtro === "canceladas" ? "activo" : ""}`}
+          onClick={() => setFiltro("canceladas")}
+        >
+          Canceladas ({reservas.filter((r) => r.cancelado).length})
+        </button>
+      </div>
+
+      {/* Loading state */}
+      {loading && (
+        <div className="loading-container">
+          <p>Cargando reservas...</p>
+          <div className="progress-bar-container">
+            <div className="progress-bar-indeterminate"></div>
+          </div>
+        </div>
+      )}
+
+      {/* Empty state */}
+      {!loading && reservas.length === 0 && (
+        <div className="empty-state">
+          <div className="empty-state-icon">📅</div>
+          <h2>No tienes reservas</h2>
+          <p>Cuando hagas una reserva, aparecerá aquí</p>
+          <a href="/#sedes" className="btn-primary">
+            Explorar Canchas
+          </a>
+        </div>
+      )}
+
+      {/* Empty filtered state */}
+      {!loading && reservas.length > 0 && reservasFiltradas.length === 0 && (
+        <div className="empty-state">
+          <div className="empty-state-icon">🔍</div>
+          <h2>No hay reservas {filtro}</h2>
+          <p>Intenta cambiar el filtro para ver otras reservas</p>
+        </div>
+      )}
+
+      {/* Reservas list */}
+      {!loading && reservasFiltradas.length > 0 && (
+        <div className="reservas-grid">
+          {reservasFiltradas.map((reserva) => {
+            const paso = reservasService.reservaYaPaso(reserva);
+
+            return (
+              <div
+                key={reserva._id}
+                className={`reserva-card ${
+                  reserva.cancelado ? "cancelada" : paso ? "expirada" : ""
+                }`}
+              >
+                {/* Badge de estado */}
+                <div className="reserva-badge">
+                  {obtenerEstadoBadge(reserva)}
+                </div>
+
+                {/* Imagen */}
+                <div className="reserva-imagen">
+                  <img
+                    src={imagenes[reserva.canchaData.deporte]}
+                    alt={`Cancha de ${reserva.canchaData.deporte}`}
+                  />
+                  <div className="reserva-deporte-overlay">
+                    {reserva.canchaData.deporte}
+                  </div>
+                </div>
+
+                {/* Información */}
+                <div className="reserva-info">
+                  <h3 className="reserva-nombre">
+                    {reserva.canchaData.name}
+                  </h3>
+
+                  <div className="reserva-detalle">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span>{reserva.canchaData.direccion}</span>
+                  </div>
+
+                  <div className="reserva-detalle">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>
+                      {reservasService.formatearFecha(reserva.espacioFecha)}
+                    </span>
+                  </div>
+
+                  <div className="reserva-detalle">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>{reserva.reservaHora}</span>
+                  </div>
+                </div>
+
+                {/* Acciones */}
+                <div className="reserva-acciones">
+                  {!reserva.cancelado && !paso && (
+                    <button
+                      onClick={() => manejarCancelacion(reserva._id)}
+                      className="btn-cancelar"
+                    >
+                      Cancelar Reserva
+                    </button>
+                  )}
+
+                  {(reserva.cancelado || paso) && (
+                    <button className="btn-deshabilitado" disabled>
+                      No Disponible
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
