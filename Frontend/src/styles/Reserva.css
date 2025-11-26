@@ -4,6 +4,8 @@
     margin: 0 auto;
     font-family: Arial, sans-serif;
     padding-top: 110px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 .reserva > p {
@@ -17,6 +19,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    
 }
 
 .reserva-filtro {
@@ -28,6 +31,7 @@
     gap: 10px; /* Reduce el espacio entre los filtros */
     margin: 0 auto 20px auto; /* Centra los filtros y ajusta el margen inferior */
     width: 90%; /* Los filtros tendrán el mismo ancho que las tarjetas */
+    
 }
 
 .reserva-filtro select {
@@ -37,6 +41,8 @@
     border-radius: 5px;
     cursor: pointer;
     width: 200px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 .canchas-card-container {
@@ -45,12 +51,14 @@
     gap: 40px;
     width: 90%; /* Las tarjetas ocuparán el 80% del contenedor */
     margin: 0 auto; /* Centra las tarjetas en la página */
+    
 }
 
 .canchas-card {
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     border-radius: 25px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -75,7 +83,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    background-color: #f0f0f0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     border-top: 1px solid #ddd;
 }
 
@@ -89,7 +98,8 @@
     margin: 0;
     font-size: 1.3rem;
     font-weight: 500;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 .cancha-estado {
