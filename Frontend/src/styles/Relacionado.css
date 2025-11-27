@@ -1,0 +1,457 @@
+/* ================= COMPONENTE RELACIONADO ================= */
+
+.relacionado-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: 4rem auto 2rem;
+    padding: 0 20px;
+  }
+  
+  /* ================= HEADER ================= */
+  .relacionado-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .relacionado-titulo {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 0.75rem 0;
+    transition: color 0.25s ease;
+    letter-spacing: -0.5px;
+  }
+  
+  .relacionado-subtitulo {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    opacity: 0.65;
+    margin: 0;
+    transition: color 0.25s ease;
+  }
+  
+  /* ================= LOADING STATE ================= */
+  .relacionado-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    gap: 1rem;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 114, 0, 0.1);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spinner 0.8s linear infinite;
+  }
+  
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .relacionado-loading p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+  
+  /* ================= GRID DE CANCHAS ================= */
+  .relacionado-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.75rem;
+    width: 100%;
+  }
+  
+  /* ================= CARD DE CANCHA ================= */
+  .relacionado-card {
+    background-color: var(--card-bg);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    display: grid;
+    grid-template-rows: 190px auto;
+    width: 100%;
+    min-height: 380px;
+    overflow: visible;
+  }
+  
+  .relacionado-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-color);
+  }
+  
+  /* ================= SECCIÓN DE IMAGEN ================= */
+  .relacionado-imagen-section {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff9100 100%);
+    border-radius: 12px 12px 0 0;
+    grid-row: 1;
+  }
+  
+  .relacionado-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .relacionado-card:hover .relacionado-imagen {
+    transform: scale(1.08);
+  }
+  
+  .relacionado-deporte-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #ffffff;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* ================= CONTENIDO ================= */
+  .relacionado-contenido {
+    padding: 1.4rem 1.3rem 1.2rem;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 1rem;
+    background-color: var(--card-bg);
+    transition: background-color 0.25s ease;
+    border-radius: 0 0 12px 12px;
+    grid-row: 2;
+    min-height: 180px;
+  }
+  
+  .relacionado-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    grid-row: 1;
+  }
+  
+  .relacionado-nombre {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.3;
+    transition: color 0.25s ease;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .relacionado-ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    opacity: 0.75;
+    transition: color 0.25s ease;
+    line-height: 1.4;
+  }
+  
+  .relacionado-ubicacion svg {
+    color: var(--primary-color);
+    flex-shrink: 0;
+  }
+  
+  .relacionado-ubicacion span {
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* ================= FOOTER ================= */
+  .relacionado-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(0, 0, 0, 0.05);
+    flex-wrap: wrap;
+    grid-row: 2;
+  }
+  
+  .relacionado-disponible {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.9rem;
+    background-color: rgba(16, 185, 129, 0.12);
+    border-radius: 20px;
+    color: #10b981;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+  
+  .relacionado-disponible svg {
+    flex-shrink: 0;
+  }
+  
+  .relacionado-btn {
+    padding: 0.6rem 1.2rem;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(255, 114, 0, 0.25);
+    white-space: nowrap;
+  }
+  
+  .relacionado-btn:hover {
+    background-color: #e66700;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 114, 0, 0.35);
+  }
+  
+  .relacionado-btn:active {
+    transform: translateY(0);
+  }
+  
+  /* ================= MENSAJE INFORMATIVO ================= */
+  .relacionado-mensaje {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    background-color: rgba(255, 114, 0, 0.08);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 114, 0, 0.2);
+  }
+  
+  .relacionado-mensaje svg {
+    color: var(--primary-color);
+    flex-shrink: 0;
+  }
+  
+  .relacionado-mensaje p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-color);
+    opacity: 0.85;
+  }
+  
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 1200px) {
+    .relacionado-grid {
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .relacionado-section {
+      margin: 3.5rem auto 1.5rem;
+    }
+  
+    .relacionado-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.3rem;
+    }
+    
+    .relacionado-imagen-section {
+      height: 170px;
+    }
+    
+    .relacionado-card {
+      grid-template-rows: 170px auto;
+      min-height: 360px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .relacionado-section {
+      padding: 0 15px;
+      margin: 3rem auto 1rem;
+    }
+  
+    .relacionado-header {
+      margin-bottom: 2rem;
+    }
+  
+    .relacionado-titulo {
+      font-size: 1.9rem;
+    }
+  
+    .relacionado-subtitulo {
+      font-size: 0.98rem;
+    }
+  
+    .relacionado-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+  
+    .relacionado-footer {
+      flex-direction: row;
+      gap: 0.7rem;
+    }
+  
+    .relacionado-disponible,
+    .relacionado-btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .relacionado-section {
+      padding: 0 10px;
+      margin: 2.5rem auto 1rem;
+    }
+  
+    .relacionado-titulo {
+      font-size: 1.6rem;
+    }
+  
+    .relacionado-subtitulo {
+      font-size: 0.92rem;
+    }
+  
+    .relacionado-grid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+  
+    .relacionado-imagen-section {
+      height: 160px;
+    }
+  
+    .relacionado-card {
+      grid-template-rows: 160px auto;
+      min-height: 340px;
+    }
+  
+    .relacionado-deporte-tag {
+      top: 10px;
+      right: 10px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.75rem;
+    }
+  
+    .relacionado-contenido {
+      padding: 1.2rem 1.1rem 1rem;
+      min-height: 170px;
+    }
+  
+    .relacionado-nombre {
+      font-size: 1.1rem;
+    }
+  
+    .relacionado-ubicacion {
+      font-size: 0.88rem;
+    }
+  
+    .relacionado-footer {
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+  
+    .relacionado-disponible {
+      width: 100%;
+      justify-content: center;
+      font-size: 0.82rem;
+    }
+  
+    .relacionado-btn {
+      width: 100%;
+      padding: 0.65rem;
+      font-size: 0.85rem;
+    }
+  
+    .relacionado-mensaje {
+      flex-direction: column;
+      text-align: center;
+      padding: 1rem;
+    }
+  
+    .relacionado-mensaje p {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* ================= DARK MODE ================= */
+  [data-theme="dark"] .relacionado-card {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  [data-theme="dark"] .relacionado-card:hover {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  }
+  
+  [data-theme="dark"] .relacionado-footer {
+    border-top: 2px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  [data-theme="dark"] .relacionado-mensaje {
+    background-color: rgba(255, 114, 0, 0.12);
+    border-color: rgba(255, 114, 0, 0.25);
+  }
+  
+  /* ================= ANIMACIONES ================= */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .relacionado-card {
+    animation: slideIn 0.4s ease-out backwards;
+  }
+  
+  .relacionado-card:nth-child(1) { animation-delay: 0.05s; }
+  .relacionado-card:nth-child(2) { animation-delay: 0.1s; }
+  .relacionado-card:nth-child(3) { animation-delay: 0.15s; }
+  .relacionado-card:nth-child(4) { animation-delay: 0.2s; }
+  .relacionado-card:nth-child(5) { animation-delay: 0.25s; }
