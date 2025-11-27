@@ -1,135 +1,604 @@
-.reserva {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    padding-top: 110px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* ================= RESET Y CONFIGURACIÓN GLOBAL ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.reserva > p {
-    font-weight: 600;
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 20px;
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
 }
 
-.reserva-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    
+/* ================= CONTAINER PRINCIPAL ================= */
+.reserva-container {
+  min-height: 100vh;
+  padding: 120px 20px 60px;
+  background-color: var(--bg-color);
+  font-family: 'Lato', sans-serif;
+  transition: background-color 0.25s ease;
+  width: 100%;
+  max-width: 100vw;
 }
 
-.reserva-filtro {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-    gap: 10px; /* Reduce el espacio entre los filtros */
-    margin: 0 auto 20px auto; /* Centra los filtros y ajusta el margen inferior */
-    width: 90%; /* Los filtros tendrán el mismo ancho que las tarjetas */
-    
+/* ================= HEADER ================= */
+.reserva-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.reserva-filtro select {
-    padding: 8px 12px;
+.reserva-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 1rem 0;
+  transition: color 0.25s ease;
+  letter-spacing: -1px;
+}
+
+.reserva-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-color);
+  opacity: 0.65;
+  transition: color 0.25s ease;
+}
+
+/* ================= FILTROS ================= */
+.filtros-section {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.filtro-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 200px;
+}
+
+.filtro-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-color);
+  opacity: 0.8;
+  transition: color 0.25s ease;
+}
+
+.filtro-group label svg {
+  color: var(--primary-color);
+}
+
+.filtro-select {
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 2px solid var(--card-bg);
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Lato', sans-serif;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 3rem;
+  width: 100%;
+}
+
+.filtro-select:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filtro-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 114, 0, 0.1);
+}
+
+.resultados-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.5rem;
+  background-color: var(--primary-color);
+  border-radius: 12px;
+  min-width: 150px;
+  box-shadow: 0 4px 12px rgba(255, 114, 0, 0.25);
+}
+
+.count-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.count-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #ffffff;
+  opacity: 0.9;
+  text-align: center;
+}
+
+/* ================= LOADING STATE ================= */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  gap: 1.5rem;
+}
+
+.loading-container p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.progress-bar-container {
+  width: 300px;
+  height: 4px;
+  background-color: var(--card-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-indeterminate {
+  height: 100%;
+  width: 50%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  animation: indeterminateAnimation 1.5s ease-in-out infinite;
+}
+
+@keyframes indeterminateAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+/* ================= EMPTY STATE ================= */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.empty-state-icon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.empty-state h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-color);
+  font-weight: 700;
+  transition: color 0.25s ease;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  max-width: 500px;
+  transition: color 0.25s ease;
+}
+
+/* ================= GRID DE CANCHAS ================= */
+.canchas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ================= CARD DE CANCHA - FIX DEFINITIVO ================= */
+.cancha-card {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  display: grid;
+  grid-template-rows: 220px auto;
+  width: 100%;
+  min-height: 450px;
+  overflow: visible;
+}
+
+.cancha-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-color);
+}
+
+/* ================= SECCIÓN DE IMAGEN ================= */
+.cancha-imagen-section {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #ff9100 100%);
+  border-radius: 14px 14px 0 0;
+  grid-row: 1;
+}
+
+.cancha-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cancha-card:hover .cancha-imagen {
+  transform: scale(1.1);
+}
+
+.cancha-deporte-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(0, 0, 0, 0.88);
+  color: #ffffff;
+  padding: 0.5rem 1.1rem;
+  border-radius: 24px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  z-index: 10;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ================= SECCIÓN DE CONTENIDO - FIX DEFINITIVO ================= */
+.cancha-contenido-section {
+  padding: 1.75rem 1.5rem 1.5rem;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 1.25rem;
+  background-color: var(--card-bg);
+  transition: background-color 0.25s ease;
+  border-radius: 0 0 14px 14px;
+  grid-row: 2;
+  min-height: 220px;
+}
+
+.cancha-info-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  grid-row: 1;
+}
+
+.cancha-titulo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1.3;
+  transition: color 0.25s ease;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: block;
+  visibility: visible;
+}
+
+.cancha-ubicacion-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  opacity: 0.75;
+  transition: color 0.25s ease;
+  line-height: 1.4;
+  visibility: visible;
+}
+
+.cancha-ubicacion-info svg {
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.cancha-ubicacion-info span {
+  word-break: break-word;
+  display: inline-block;
+}
+
+/* ================= FOOTER DE ACCIONES - SIEMPRE VISIBLE ================= */
+.cancha-acciones-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.06);
+  flex-wrap: wrap;
+  grid-row: 2;
+  visibility: visible;
+}
+
+.cancha-estado-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background-color: rgba(16, 185, 129, 0.12);
+  border-radius: 24px;
+  color: #10b981;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  visibility: visible;
+}
+
+.cancha-estado-badge svg {
+  flex-shrink: 0;
+}
+
+.btn-ver-horarios {
+  padding: 0.7rem 1.4rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  box-shadow: 0 3px 10px rgba(255, 114, 0, 0.3);
+  white-space: nowrap;
+  visibility: visible;
+  display: inline-block;
+}
+
+.btn-ver-horarios:hover {
+  background-color: #e66700;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 114, 0, 0.4);
+}
+
+.btn-ver-horarios:active {
+  transform: translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1200px) {
+  .canchas-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.8rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .canchas-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .cancha-imagen-section {
+    height: 200px;
+  }
+  
+  .cancha-card {
+    grid-template-rows: 200px auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .reserva-container {
+    padding: 100px 15px 40px;
+  }
+
+  .reserva-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .reserva-subtitle {
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 200px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
+  }
 
-.canchas-card-container {
-    display: flex;
+  .filtros-section {
     flex-direction: column;
-    gap: 40px;
-    width: 90%; /* Las tarjetas ocuparán el 80% del contenedor */
-    margin: 0 auto; /* Centra las tarjetas en la página */
-    
-}
+    align-items: stretch;
+    gap: 1rem;
+  }
 
-.canchas-card {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-}
-
-.canchas-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.canchas-card-img {
+  .filtro-group {
     width: 100%;
+  }
+
+  .resultados-count {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  .count-number {
+    font-size: 1.5rem;
+  }
+
+  .count-text {
+    font-size: 0.9rem;
+  }
+
+  .canchas-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .cancha-acciones-footer {
+    flex-direction: row;
+    gap: 0.8rem;
+  }
+
+  .cancha-estado-badge,
+  .btn-ver-horarios {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .reserva-container {
+    padding: 90px 10px 30px;
+  }
+
+  .reserva-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .reserva-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .filtro-select {
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .cancha-imagen-section {
     height: 180px;
-    object-fit:cover;
-    box-shadow: 0 8px 16px rgba(1, 2, 2, 0.2);
-}
+  }
 
-.canchas-card-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border-top: 1px solid #ddd;
-}
+  .cancha-card {
+    grid-template-rows: 180px auto;
+    min-height: 420px;
+  }
 
-.canchas-card-info div {
-    display: flex;
+  .cancha-deporte-tag {
+    top: 12px;
+    right: 12px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .cancha-contenido-section {
+    padding: 1.3rem;
+    min-height: 200px;
+  }
+
+  .cancha-titulo {
+    font-size: 1.2rem;
+  }
+
+  .cancha-ubicacion-info {
+    font-size: 0.9rem;
+  }
+
+  .cancha-acciones-footer {
     flex-direction: column;
-    gap: 5px;
+    gap: 0.7rem;
+  }
+
+  .cancha-estado-badge {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.88rem;
+  }
+
+  .btn-ver-horarios {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.92rem;
+  }
+
+  .empty-state-icon {
+    font-size: 3.5rem;
+  }
+
+  .empty-state h2 {
+    font-size: 1.4rem;
+  }
+
+  .empty-state p {
+    font-size: 0.98rem;
+  }
+
+  .progress-bar-container {
+    max-width: 220px;
+  }
 }
 
-.canchas-card-info p {
-    margin: 0;
-    font-size: 1.3rem;
-    font-weight: 500;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+/* ================= DARK MODE ================= */
+[data-theme="dark"] .cancha-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.cancha-estado {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1rem;
-    color: #28a745;
-    font-weight: bold;
+[data-theme="dark"] .cancha-card:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
 }
 
-.cancha-estado img {
-    width: 20px;
-    height: 20px;
+[data-theme="dark"] .cancha-acciones-footer {
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.canchas-card button {
-    padding: 10px 25px;
-    background-color: #ff6600;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+[data-theme="dark"] .filtro-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
 }
 
-.canchas-card button:hover {
-    background-color: #e65b2c;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+/* ================= ANIMACIONES ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+.cancha-card {
+  animation: fadeIn 0.5s ease-out backwards;
+}
+
+.cancha-card:nth-child(1) { animation-delay: 0.05s; }
+.cancha-card:nth-child(2) { animation-delay: 0.1s; }
+.cancha-card:nth-child(3) { animation-delay: 0.15s; }
+.cancha-card:nth-child(4) { animation-delay: 0.2s; }
+.cancha-card:nth-child(5) { animation-delay: 0.25s; }
+.cancha-card:nth-child(6) { animation-delay: 0.3s; }
+.cancha-card:nth-child(7) { animation-delay: 0.35s; }
+.cancha-card:nth-child(8) { animation-delay: 0.4s; }

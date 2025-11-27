@@ -1,252 +1,607 @@
-html, body {
-    overflow-y: auto; /* Permite el scroll */
-    height: 100%; /* Asegura que la página ocupe la altura completa */
-    font-family: 'Arial', sans-serif; /* Fuente estándar */
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* ================= CONTAINER PRINCIPAL ================= */
+.cancha-container {
+  min-height: 100vh;
+  padding: 120px 20px 60px;
+  background-color: var(--bg-color);
+  font-family: 'Lato', sans-serif;
+  transition: background-color 0.25s ease;
 }
 
-.cancha {
-    padding: 20px 40px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+/* ================= LOADING STATE ================= */
+.cancha-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
 }
 
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loading-container p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.progress-bar-container {
+  width: 300px;
+  height: 4px;
+  background-color: var(--card-bg);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-indeterminate {
+  height: 100%;
+  width: 50%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  animation: indeterminateAnimation 1.5s ease-in-out infinite;
+}
+
+@keyframes indeterminateAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+/* ================= CARD DE CANCHA ================= */
 .cancha-card {
-    display: flex;
-    gap: 40px;
-    margin-top: 100px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    border-radius: 20px;
-    padding: 20px;
-    overflow: hidden;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
 }
 
-.cancha-card-image {
-    height: 100%;
-    border-radius: 20px;
-    max-width: 300px;
-    object-fit: cover; /* Asegura que la imagen se ajuste al contenedor */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* ================= IMAGEN ================= */
+.cancha-imagen-container {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 400px;
 }
 
+.cancha-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.cancha-card:hover .cancha-imagen {
+  transform: scale(1.05);
+}
+
+.cancha-deporte-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 0.6rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ================= INFORMACIÓN ================= */
 .cancha-info {
-    border: 1px solid #ddd; /* Borde ligero */
-    padding: 20px;
-    border-radius: 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.cancha-info button {
-    background: #ff7a00;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 15px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.cancha-info-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
-.cancha-info button:hover {
-    background-color: #e06900;
+.cancha-nombre {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.2;
+  transition: color 0.25s ease;
 }
 
-.cancha-info > p {
-    font-size: 24px;
-    font-weight: bold;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin-bottom: 10px;
+.cancha-ubicacion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.cancha-ubicacion svg {
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.cancha-descripcion {
+  background-color: var(--bg-color);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cancha-descripcion h3 {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin: 0 0 0.8rem 0;
+  font-weight: 600;
 }
 
 .cancha-descripcion p {
-    margin: 5px 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.8;
 }
 
-.cancha-descripcion span {
-    font-weight: bold;
-    color: #ff7a00;
+.cancha-precio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #ff9100 100%);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.opciones-reserva {
-    margin-top: 40px;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+.precio-label {
+  font-weight: 500;
 }
 
-.opciones-reserva p {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+.precio-valor {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
-.dia-reserva {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-    overflow-x: auto;
-    padding: 10px;
-    scrollbar-width: none; /* Oculta el scrollbar en navegadores compatibles */
+/* ================= SECCIÓN DE RESERVA ================= */
+.reserva-section {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+  overflow: hidden;
+  width: 100%;
 }
 
-.dia-reserva::-webkit-scrollbar {
-    display: none; /* Oculta el scrollbar en navegadores Webkit */
+.reserva-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
-.dia-reserva div {
-    cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    color: #333;
-    font-size: 14px;
-    text-align: center;
-    transition: all 0.3s ease;
+.reserva-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 0.5rem 0;
+  transition: color 0.25s ease;
 }
 
-.dia-reserva div:hover {
-    background-color: #ff7a00;
-    color: white;
-    border-color: #ff7a00;
+.reserva-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-color);
+  opacity: 0.65;
+  margin: 0;
 }
 
-.dia-reserva .active-day {
-    background-color: #ff7a00;
-    color: white;
-    border-color: #ff7a00;
+/* ================= SELECTOR DE DÍAS ================= */
+.dias-selector {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0.5rem;
+  margin-bottom: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) var(--card-bg);
+  /* Prevent overflow */
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
-.hora-reserva {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-    overflow-x: auto;
-    padding: 10px;
-    scrollbar-width: none;
+.dias-selector::-webkit-scrollbar {
+  height: 8px;
 }
 
-.hora-reserva::-webkit-scrollbar {
-    display: none;
+.dias-selector::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 10px;
 }
 
-.hora-reserva p {
-    padding: 10px 15px;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    color: #555;
-    font-size: 14px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
+.dias-selector::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
 }
 
-.hora-reserva p:hover {
-    background-color: #ff7a00;
-    color: white;
-    border-color: #ff7a00;
+.dias-selector::-webkit-scrollbar-thumb:hover {
+  background: #e66700;
 }
 
-.hora-reserva .active-day {
-    background-color: #ff7a00;
-    color: white;
-    border-color: #ff7a00;
+.dia-card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-width: 90px;
+  max-width: 90px;
+  padding: 1.2rem 0.8rem;
+  background-color: var(--bg-color);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
 }
 
-.opciones-reserva button {
-    background-color: #ff7a00;
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+.dia-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.opciones-reserva button:hover {
-    background-color: #e06900;
+.dia-card.activo {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 16px rgba(255, 114, 0, 0.3);
 }
 
-.relacionado-container {
-    margin: 40px auto;
-    max-width: 800px;
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+.dia-semana {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+}
+
+.dia-card.activo .dia-semana {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.dia-numero {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.dia-card.activo .dia-numero {
+  color: #ffffff;
+}
+
+.dia-mes {
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  text-transform: capitalize;
+}
+
+.dia-card.activo .dia-mes {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+/* ================= SELECTOR DE HORAS ================= */
+.horas-container {
+  margin-bottom: 2rem;
+  /* Prevent overflow */
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.horas-titulo {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0 0 1.5rem 0;
+  transition: color 0.25s ease;
+}
+
+.horas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 1rem;
+  max-width: 100%;
+}
+
+.hora-btn {
+  padding: 1rem;
+  background-color: var(--bg-color);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.hora-btn:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hora-btn.activo {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(255, 114, 0, 0.3);
+}
+
+.no-horarios {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  font-size: 1.05rem;
+}
+
+/* ================= ACCIONES DE RESERVA ================= */
+.reserva-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--bg-color);
+}
+
+.reserva-resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  min-height: 80px;
+  justify-content: center;
+}
+
+.resumen-label {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.resumen-info {
+  font-size: 1.15rem;
+  color: var(--text-color);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.btn-reservar {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #ff9100 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 16px rgba(255, 114, 0, 0.25);
+}
+
+.btn-reservar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 114, 0, 0.35);
+}
+
+.btn-reservar:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-reservar:disabled {
+  background: var(--card-bg);
+  color: var(--text-color);
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .cancha-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .cancha-imagen-container {
+    height: 350px;
+  }
+
+  .horas-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
-    .cancha-card {
-        flex-direction: column; 
-        align-items: center; 
-        gap: 20px; 
-        margin-top: 50px;
-        padding: 15px; 
-    }
+  .cancha-container {
+    padding: 100px 15px 40px;
+  }
 
-    .cancha-card-image {
-        max-width: 90%; 
-        height: auto; 
-        border-radius: 15px;
-    }
+  .cancha-card {
+    padding: 1.5rem;
+  }
 
-    .cancha-info {
-        padding: 15px; 
-        width: 100%; 
-    }
+  .cancha-nombre {
+    font-size: 2rem;
+  }
 
-    .cancha-info > p {
-        font-size: 18px; 
-        text-align: center; 
-    }
+  .cancha-imagen-container {
+    height: 300px;
+  }
 
-    .cancha-info button {
-        font-size: 12px; 
-        padding: 8px 10px; 
-        width: 100%; 
-    }
+  .reserva-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .reserva-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .dias-selector {
+    gap: 0.75rem;
+    padding: 1rem 0.25rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .dia-card {
+    min-width: 80px;
+    max-width: 80px;
+    padding: 1rem 0.5rem;
+    scroll-snap-align: start;
+  }
+
+  .horas-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .hora-btn {
+    padding: 0.85rem;
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .cancha {
-        padding: 10px 20px; 
-    }
+  .cancha-container {
+    padding: 90px 10px 30px;
+  }
 
-    .cancha-card {
-        padding: 10px;
-        gap: 10px; 
-    }
+  .cancha-card {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
 
-    .cancha-info > p {
-        font-size: 16px; 
-    }
+  .cancha-nombre {
+    font-size: 1.6rem;
+  }
 
-    .cancha-info button {
-        font-size: 10px; 
-        padding: 6px 8px; 
-    }
+  .cancha-ubicacion {
+    font-size: 1rem;
+  }
 
-    .cancha-card-image {
-        max-width: 100%; 
-        border-radius: 10px;
-    }
+  .cancha-imagen-container {
+    height: 250px;
+  }
+
+  .cancha-deporte-badge {
+    top: 15px;
+    left: 15px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .cancha-descripcion {
+    padding: 1rem;
+  }
+
+  .cancha-precio {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .precio-valor {
+    font-size: 1.5rem;
+  }
+
+  .reserva-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .reserva-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .reserva-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .dia-card {
+    min-width: 70px;
+    max-width: 70px;
+    padding: 0.8rem 0.4rem;
+  }
+
+  .dia-numero {
+    font-size: 1.5rem;
+  }
+
+  .horas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hora-btn {
+    font-size: 0.9rem;
+  }
+
+  .btn-reservar {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .resumen-info {
+    font-size: 1rem;
+  }
+}
+
+/* ================= DARK MODE ADJUSTMENTS ================= */
+[data-theme="dark"] .cancha-card {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .reserva-section {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .cancha-descripcion {
+  border-color: rgba(255, 255, 255, 0.05);
 }
